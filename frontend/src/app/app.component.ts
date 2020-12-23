@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+  feature: string = 'recipes';
+  onNavigate(event: string){
+    console.log(event);
+    this.feature = event;
+  }
 }
