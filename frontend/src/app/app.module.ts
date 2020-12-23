@@ -12,6 +12,7 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { DropDownDirective } from './derivatives/drop-down.directive';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DropDownDirective } from './derivatives/drop-down.directive';
     RecipeDetailComponent,
     RecipeListComponent,
     RecipeItemComponent,
-    DropDownDirective
+    DropDownDirective,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
