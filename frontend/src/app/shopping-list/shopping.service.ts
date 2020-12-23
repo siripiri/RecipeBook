@@ -27,5 +27,18 @@ export class ShoppingService {
     to send the new copy of data */
   }
 
+  fromShoppingList(ingredients: Ingredient[]){
+    //this.ingredients.push(... ingredients);
+    for(let ingredient of ingredients){
+      let index = this.ingredients.findIndex(item => item.name == ingredient.name);
+      if(index >=0 ){
+        this.ingredients[index].amount += ingredient.amount;
+      }
+      else{
+        this.ingredients.push(ingredient);
+      }
+    }
+    this.ingredientChanger.emit(this.ingredients.slice());
+  }
   constructor() { }
 }
