@@ -1,19 +1,22 @@
 <div class="row">
     <div class="col-xs-12">
-        <form>
+        <form #userForms = "ngForm" (ngSubmit)="onSubmit()">
+            {{userForms.value | json}}
             <div class="row">
                 <div class="col-sm-5 form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" class="form-control">
+                    <input type="text" name="name" id="name" class="form-control" #name="ngModel" ngModel required>
+                    <span class="text-danger" *ngIf="name.touched && name.invalid">Name is required</span>
                 </div>
                 <div class="col-sm-2 form-group">
                     <label for="amount">Amount</label>
-                    <input type="number" id="amount" class="form-control">
+                    <input type="number" name="amount" id="amount" class="form-control" #amount="ngModel" ngModel required>
+                    <span class="text-danger" *ngIf="amount.touched && amount.invalid">Amount is required</span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn btn-success" type="submit">Add</button>
+                    <button class="btn btn-success" type="submit" [disabled]="userForms.invalid">Add</button>
                     <button class="btn btn-danger" type="button">Delete</button>
                     <button class="btn btn-primary" type="button">Clear</button>
                 </div>
