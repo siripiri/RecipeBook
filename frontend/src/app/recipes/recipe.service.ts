@@ -13,7 +13,9 @@ export class RecipeService {
     new Recipe('A Browine with icecream', 'This is simply a test', 'https://www.oetker.in/Recipe/Recipes/oetker.in/in-en/dessert/image-thumb__52705__RecipeDetailsLightBox/brownie-with-vanilla-ice-cream.jpg',[new Ingredient('Browine',3),new Ingredient('vanilla icecream',2)])
   ];
 
-  selectedRecipe = new EventEmitter<Recipe>();
+  selectedRecipe(id:number){
+    return Object.assign({},this.recipes[id]);
+  }
 
   getRecipes(){
     /* Instead of reference it will send the new array with exact same copy of 
