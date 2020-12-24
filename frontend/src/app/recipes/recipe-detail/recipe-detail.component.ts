@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params } from '@angular/router';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 
@@ -10,7 +10,7 @@ import { RecipeService } from '../recipe.service';
 })
 export class RecipeDetailComponent implements OnInit {
 
-  constructor(private recipeService: RecipeService,private route:ActivatedRoute) { }
+  constructor(private recipeService: RecipeService,private route:ActivatedRoute,private router : Router) { }
 
   recipe:Recipe;
   id:number;
@@ -38,6 +38,10 @@ export class RecipeDetailComponent implements OnInit {
   toShoppingList(){
     let clone = this.recipe.ingredients.map(a => ({...a}) );
     this.recipeService.addToShoppingList(clone);
+  }
+
+  toEditRecipe(){
+    this.router.navigate(['../',this.id,'edit'],{relativeTo:this.route});
   }
 
 }
