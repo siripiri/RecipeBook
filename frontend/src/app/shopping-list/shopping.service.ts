@@ -1,4 +1,5 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Ingredient } from '../shared/ingredient.model';
 
 @Injectable({
@@ -6,7 +7,7 @@ import { Ingredient } from '../shared/ingredient.model';
 })
 export class ShoppingService {
 
-  ingredientChanger = new EventEmitter<Ingredient[]>();
+  ingredientChanger = new Subject<Ingredient[]>();
 
   ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
@@ -22,7 +23,7 @@ export class ShoppingService {
     This is because we just sending the copy or slice of the ingredient[] */
     this.ingredients.push(ingredient);
 
-    this.ingredientChanger.emit(this.ingredients.slice());/* After emiting the data go to the places where getIngredient methode used
+    this.ingredientChanger.next(this.ingredients.slice());/* After emiting the data go to the places where getIngredient methode used
     and subcribe to that event so that when ever we change the data we can able 
     to send the new copy of data */
   }
@@ -38,7 +39,7 @@ export class ShoppingService {
         this.ingredients.push(ingredient);
       }
     }
-    this.ingredientChanger.emit(this.ingredients.slice());
+    this.ingredientChanger.next(this.ingredients.slice());
   }
   constructor() { }
 }
