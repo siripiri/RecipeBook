@@ -50,6 +50,14 @@ export class ShoppingService {
     this.ingredients[index] = newIngredient;
     this.ingredientChanger.next(this.ingredients.slice());
   }
+  
+
+  deleteIngredient(index: number){
+    if(index > -1){
+      this.ingredients.splice(index,1);
+      this.ingredientChanger.next(this.ingredients.slice());
+    }
+  }
 
   constructor() { }
 }
