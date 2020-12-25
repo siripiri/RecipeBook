@@ -8,12 +8,16 @@ import { Ingredient } from '../shared/ingredient.model';
 export class ShoppingService {
 
   ingredientChanger = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>();
 
   ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 10),
   ];
 
+  getIngredientIndex(index : number){
+    return this.ingredients[index];
+  }
 
   getIngredient(){
     return this.ingredients.slice();
@@ -41,5 +45,11 @@ export class ShoppingService {
     }
     this.ingredientChanger.next(this.ingredients.slice());
   }
+
+  updateIngredient(index: number,newIngredient: Ingredient){
+    this.ingredients[index] = newIngredient;
+    this.ingredientChanger.next(this.ingredients.slice());
+  }
+
   constructor() { }
 }
