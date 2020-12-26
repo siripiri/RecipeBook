@@ -1,4 +1,5 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingService } from '../shopping-list/shopping.service';
 import { Recipe } from './recipe.model';
@@ -13,8 +14,10 @@ export class RecipeService {
     new Recipe('A Browine with icecream', 'This is simply a test', 'https://www.oetker.in/Recipe/Recipes/oetker.in/in-en/dessert/image-thumb__52705__RecipeDetailsLightBox/brownie-with-vanilla-ice-cream.jpg',[new Ingredient('Browine',3),new Ingredient('vanilla icecream',2)])
   ];
 
+  recipeChanger = new Subject<Recipe[]>();
+
   selectedRecipe(id:number){
-    return Object.assign({},this.recipes[id]);
+    return this.recipes.slice()[id];
   }
 
   getRecipes(){
@@ -27,5 +30,21 @@ export class RecipeService {
     this.shoppingService.fromShoppingList(ingredients)
   }
 
+  addRecipe(recipe: Recipe){
+    this.recipes.push(recipe);
+    this.recipeChanger.next(this.recipes.slice());
+  }
+
+  editRecipe(index: number, newRecipe: Recipe){
+    this.recipes[index] = newRecipe;
+    this.recipeChanger.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index: number){
+    if(index > -1){
+      this.recipes.splice(index,1);
+      this.recipeChanger.next(this.recipes.slice());
+    }
+  }
   constructor(private shoppingService: ShoppingService) { }
 }
