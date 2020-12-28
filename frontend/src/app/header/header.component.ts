@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   constructor(private dataStorageService : DataStorageService) { }
 
   ngOnInit(): void {
+    
   }
 
   onSelect(feature: string){
@@ -32,7 +33,7 @@ export class HeaderComponent implements OnInit {
   }
 
   fetchData(){
-    this.dataStorageService.fetchRecipes();
+    this.dataStorageService.fetchRecipes().subscribe((data)=> console.log(data),(error)=>console.log(error.message));
   }
 
 }
